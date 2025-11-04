@@ -1,0 +1,95 @@
+# Justfile for Industryts Documentation
+#
+# Usage:
+#   just dev      - Start development server (auto-install if needed)
+#   just build    - Build for production
+#   just preview  - Preview production build
+#   just install  - Install dependencies
+#   just clean    - Clean build artifacts
+
+# Default recipe (shown when running 'just' without arguments)
+default:
+    @just --list
+
+# Start development server with auto-install
+dev:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "🚀 Starting Industryts documentation..."
+
+    # Check if node_modules exists
+    if [ ! -d "node_modules" ]; then
+        echo "📦 Dependencies not found. Installing..."
+        just install
+    else
+        echo "✅ Dependencies already installed"
+    fi
+
+    echo "🔥 Starting VitePress dev server..."
+    npm run docs:dev
+
+# Install dependencies
+install:
+    @echo "📦 Installing documentation dependencies..."
+    npm install
+    @echo "✅ Installation complete!"
+
+# Build documentation for production
+build:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if [ ! -d "node_modules" ]; then
+        echo "📦 Dependencies not found. Installing first..."
+        just install
+    fi
+
+    echo "🏗️  Building documentation..."
+    npm run docs:build
+    @echo "✅ Build complete! Output: .vitepress/dist/"
+
+# Preview production build
+preview:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if [ ! -d ".vitepress/dist" ]; then
+        echo "⚠️  Build not found. Building first..."
+        just build
+    fi
+
+    echo "👀 Previewing documentation..."
+    npm run docs:preview
+
+# Clean build artifacts
+clean:
+    @echo "🧹 Cleaning build artifacts..."
+    rm -rf .vitepress/dist
+    rm -rf .vitepress/cache
+    @echo "✅ Clean complete!"
+
+# Clean everything including node_modules
+clean-all:
+    @echo "🧹 Cleaning everything..."
+    rm -rf .vitepress/dist
+    rm -rf .vitepress/cache
+    rm -rf node_modules
+    rm -f package-lock.json
+    @echo "✅ Deep clean complete!"
+
+# Reinstall dependencies (clean + install)
+reinstall:
+    just clean-all
+    just install
+
+# Check for updates
+check:
+    @echo "🔍 Checking for outdated packages..."
+    npm outdated || true
+
+# Update dependencies
+update:
+    @echo "⬆️  Updating dependencies..."
+    npm update
+    @echo "✅ Update complete!"

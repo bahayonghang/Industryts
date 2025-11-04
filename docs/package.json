@@ -1,0 +1,24 @@
+{
+  "name": "industryts-docs",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Documentation for Industryts - High-performance time series processing library",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0",
+    "vue": "^3.4.0"
+  },
+  "keywords": [
+    "industryts",
+    "time-series",
+    "documentation",
+    "rust",
+    "python",
+    "polars"
+  ],
+  "license": "MIT"
+}
