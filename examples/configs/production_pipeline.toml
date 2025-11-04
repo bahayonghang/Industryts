@@ -1,0 +1,25 @@
+# Production pipeline with comprehensive processing
+
+[pipeline]
+name = "production_pipeline"
+time_column = "tagTime"
+
+# Step 1: Clean data
+[[operations]]
+type = "fill_null"
+method = "forward"
+
+# Step 2: Resample to consistent intervals
+[[operations]]
+type = "resample"
+rule = "10min"
+aggregation = "mean"
+
+# Step 3: Feature engineering
+[[operations]]
+type = "lag"
+periods = [1, 3, 6]
+
+# Step 4: Standardize
+[[operations]]
+type = "standardize"

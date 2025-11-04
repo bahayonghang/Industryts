@@ -1,0 +1,28 @@
+[package]
+name = "industryts-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core Rust library for high-performance time series processing"
+
+[lib]
+name = "industryts_core"
+crate-type = ["lib"]
+
+[dependencies]
+polars.workspace = true
+serde.workspace = true
+toml.workspace = true
+thiserror.workspace = true
+anyhow.workspace = true
+rayon.workspace = true
+
+[dev-dependencies]
+criterion = "0.5"
+
+# Benchmarks will be added later
+# [[bench]]
+# name = "operations_bench"
+# harness = false

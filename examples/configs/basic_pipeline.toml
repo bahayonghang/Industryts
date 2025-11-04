@@ -1,0 +1,27 @@
+# Basic time series processing pipeline
+
+[pipeline]
+name = "basic_processing"
+time_column = "DateTime"
+
+# Fill null values using forward fill
+[[operations]]
+type = "fill_null"
+method = "forward"
+
+# Resample to hourly intervals with mean aggregation
+[[operations]]
+type = "resample"
+rule = "1h"
+aggregation = "mean"
+
+# Create lag features (1, 2, 3 periods)
+[[operations]]
+type = "lag"
+periods = [1, 2, 3]
+columns = ["temperature", "pressure"]
+
+# Standardize features
+[[operations]]
+type = "standardize"
+columns = ["temperature", "pressure"]

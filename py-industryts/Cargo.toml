@@ -1,0 +1,24 @@
+[package]
+name = "industryts"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Python bindings for industryts - high-performance time series processing"
+
+[lib]
+name = "industryts"
+crate-type = ["cdylib"]
+
+[dependencies]
+industryts-core = { path = "../crates/industryts-core" }
+pyo3.workspace = true
+polars.workspace = true
+
+[dependencies.pyo3-polars]
+version = "0.24"
+features = []
+
+[build-dependencies]
+pyo3-build-config = "0.25"

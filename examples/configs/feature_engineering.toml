@@ -1,0 +1,16 @@
+# Feature engineering pipeline for industrial sensors
+
+[pipeline]
+name = "feature_engineering"
+
+[[operations]]
+type = "fill_null"
+method = "forward"
+
+[[operations]]
+type = "lag"
+periods = [1, 2, 3]
+columns = ["temperature", "pressure"]
+
+[[operations]]
+type = "standardize"
