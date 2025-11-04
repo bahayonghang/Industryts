@@ -17,36 +17,6 @@
   pip install polars[rt64]
   ```
 
-## Install from PyPI
-
-The recommended way to install Industryts is via pip:
-
-::: code-group
-
-```bash [pip]
-pip install industryts
-```
-
-```bash [uv (recommended)]
-# uv is faster and more reliable
-uv add industryts
-```
-
-```bash [with optional dependencies]
-pip install industryts polars[rt64]
-```
-
-:::
-
-### Verify Installation
-
-```python
-import industryts as its
-
-print(its.__version__)
-print(its.TimeSeriesData)  # Should show class info
-```
-
 ## Install from Source
 
 For development or to use the latest features:

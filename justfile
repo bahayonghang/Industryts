@@ -132,12 +132,6 @@ info:
     @echo "Project structure:"
     @tree -L 2 -I 'target|__pycache__|*.pyc|.git'
 
-# Publish to PyPI (requires credentials)
-publish: manylinux
-    @echo "📤 Publishing to PyPI..."
-    uv run maturin publish
-    @echo "✅ Published!"
-
 # Quick rebuild and test cycle
 quick: dev example
     @echo "✅ Quick test cycle complete!"

@@ -1,8 +1,6 @@
 # Industryts
 
 [![CI](https://github.com/your-org/industryts/workflows/CI/badge.svg)](https://github.com/your-org/industryts/actions)
-[![PyPI](https://img.shields.io/pypi/v/industryts.svg)](https://pypi.org/project/industryts/)
-[![Python Version](https://img.shields.io/pypi/pyversions/industryts.svg)](https://pypi.org/project/industryts/)
 
 High-performance time series processing library for industrial data, powered by Rust and Polars.
 
@@ -20,17 +18,11 @@ High-performance time series processing library for industrial data, powered by 
 
 ### Requirements
 
-- **Python**: 3.8+
+- **Python**: 3.9+
 - **Operating System**: Linux (glibc 2.17+), macOS, Windows
 - **Optional**: For large datasets (>4.2B rows), install with `polars[rt64]`
 
-### Install from PyPI
-
-```bash
-pip install industryts
-```
-
-### Install from source (development)
+### Install from source
 
 ```bash
 # Clone repository

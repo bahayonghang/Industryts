@@ -17,36 +17,6 @@
   pip install polars[rt64]
   ```
 
-## 从 PyPI 安装
-
-推荐通过 pip 安装 Industryts:
-
-::: code-group
-
-```bash [pip]
-pip install industryts
-```
-
-```bash [uv (推荐)]
-# uv 更快更可靠
-uv add industryts
-```
-
-```bash [包含可选依赖]
-pip install industryts polars[rt64]
-```
-
-:::
-
-### 验证安装
-
-```python
-import industryts as its
-
-print(its.__version__)
-print(its.TimeSeriesData)  # 应该显示类信息
-```
-
 ## 从源码安装
 
 用于开发或使用最新功能:
