@@ -66,7 +66,7 @@ site/
 # Project specific
 *.whl
 maturin.log
-output.csv  # Example output file
+output.csv
 
 # OS
 .DS_Store
