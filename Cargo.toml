@@ -6,7 +6,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Your Name <your.email@example.com>"]
 license = "MIT"
@@ -14,14 +14,14 @@ repository = "https://github.com/your-org/industryts"
 
 [workspace.dependencies]
 # Polars for DataFrame operations (using 0.51 to match pyo3-polars 0.24)
-polars = { version = "0.51", features = ["lazy", "temporal", "dtype-datetime", "dtype-date"] }
+polars = { version = "0.51.0", features = ["lazy", "temporal", "dtype-datetime", "dtype-date"] }
 
 # PyO3 for Python bindings (using 0.25 for pyo3-polars compatibility)
-pyo3 = { version = "0.25", features = ["extension-module", "abi3-py38"] }
+pyo3 = { version = "0.25.1", features = ["extension-module", "abi3-py38"] }
 
 # Serialization
 serde = { version = "1.0", features = ["derive"] }
-toml = "0.8"
+toml = "0.9.8"
 
 # Error handling
 thiserror = "2.0"
