@@ -11,17 +11,31 @@ docs/
 │   └── dist/              # Built documentation (generated)
 ├── en/                    # English documentation
 │   ├── index.md          # English homepage
-│   ├── guide/            # User guides
+│   ├── guide/
+│   │   ├── architecture.md    # Architecture guide
+│   │   ├── migration.md       # Migration guide v0.1.x → v0.2.0
+│   │   ├── examples.md        # Code examples and use cases
+│   │   ├── installation.md    # Installation instructions
+│   │   ├── introduction.md    # Introduction to IndustryTS
+│   │   ├── quick-start.md     # Quick start guide
+│   │   └── concepts/
 │   ├── api/              # API reference
-│   ├── examples/         # Usage examples
 │   └── development/      # Development documentation
-├── zh/                    # Chinese documentation (mirrors en/ structure)
+├── zh/                    # Chinese documentation
 │   ├── index.md          # Chinese homepage
 │   ├── guide/
-│   ├── api/
-│   ├── examples/
-│   └── development/
-└── package.json           # Node.js dependencies
+│   │   ├── architecture.md    # 架构指南
+│   │   ├── migration.md       # 迁移指南
+│   │   ├── examples.md        # 示例和用例
+│   │   ├── installation.md    # 安装说明
+│   │   ├── introduction.md    # IndustryTS 简介
+│   │   ├── quick-start.md     # 快速开始
+│   │   └── concepts/
+│   ├── api/              # API 参考
+│   └── development/      # 开发文档
+├── README.md              # Documentation guide
+├── package.json           # Node.js dependencies
+└── justfile               # Build commands
 
 ```
 
@@ -97,10 +111,29 @@ Built files will be in `.vitepress/dist/`.
 
 The documentation is fully bilingual:
 
-- **English** (`/en/`): Default language
-- **中文** (`/zh/`): Chinese translation
+- **English** (`/en/guide/`): Default language
+- **中文** (`/zh/guide/`): Chinese translation
 
 Both languages have mirrored structure and content. When adding new pages, ensure both versions are created.
+
+## 🆕 v0.2.0 Documentation
+
+IndustryTS v0.2.0 introduces a redesigned architecture with improved modularity and new features.
+
+### Key Guides
+- **[Architecture Guide](./en/guide/architecture.md)** - Core modules and concepts (English)
+- **[架构指南](./zh/guide/architecture.md)** - 核心模块和概念 (Chinese)
+- **[Migration Guide](./en/guide/migration.md)** - Upgrading from v0.1.x (English)
+- **[迁移指南](./zh/guide/migration.md)** - 从 v0.1.x 升级 (Chinese)
+- **[Examples](./en/guide/examples.md)** - Code examples and use cases (English)
+- **[示例](./zh/guide/examples.md)** - 代码示例和用例 (Chinese)
+
+### Key Features in v0.2.0
+- ✅ **Core Abstractions**: Enhanced `TimeSeriesData`, `Operation` trait, `ExecutionContext`
+- ✅ **Pipeline Engine**: `Pipeline`, `PipelineBuilder`, `OperationRegistry`
+- ✅ **Execution Tracking**: Performance metrics and execution context
+- ✅ **Backward Compatibility**: All v0.1.x APIs remain functional
+- ✅ **100% Test Coverage**: 16/16 tests passing
 
 ## ✍️ Writing Documentation
 
