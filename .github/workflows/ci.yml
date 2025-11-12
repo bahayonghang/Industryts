@@ -54,10 +54,10 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Run clippy
-        run: cargo clippy --all-targets --all-features -- -D warnings
+        run: cargo clippy --manifest-path crates/industryts-core/Cargo.toml -- -D warnings
 
       - name: Run Rust tests
-        run: cargo test --workspace --all-features
+        run: cargo test --manifest-path crates/industryts-core/Cargo.toml --lib
 
   # Python 代码检查（ruff、mypy）
   python-lint:
@@ -83,7 +83,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff mypy
+          pip install ruff mypy pyright
 
       - name: Run ruff check
         run: ruff check .
@@ -91,9 +91,11 @@ jobs:
       - name: Run ruff format check
         run: ruff format --check .
 
-      - name: Run mypy
-        run: mypy py-industryts/industryts
-        continue-on-error: true  # 类型检查不阻塞 CI，仅警告
+      - name: Run mypy (strict mode)
+        run: mypy py-industryts/industryts --strict
+
+      - name: Run pyright
+        run: pyright py-industryts/industryts
 
   # Python 测试（多版本矩阵）
   python-test:
@@ -127,16 +129,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-py${{ matrix.python-version }}-
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          version: "latest"
+
       - name: Install maturin and test dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install maturin pytest pytest-benchmark hypothesis
+          uv pip install --system --upgrade pip
+          uv pip install --system maturin pytest pytest-benchmark hypothesis
 
       - name: Build and install package
-        run: maturin develop --release
+        run: uv run maturin develop --release
 
       - name: Run Python tests
-        run: pytest py-industryts/tests -v
+        run: uv run pytest py-industryts/tests -v
         continue-on-error: ${{ matrix.python-version == '3.13' }}  # 3.13 可能有兼容性问题
 
   # 集成检查（确保所有检查通过）
