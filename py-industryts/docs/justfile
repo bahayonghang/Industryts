@@ -1,0 +1,107 @@
+# Justfile for py-industryts documentation
+#
+# Usage:
+#   just dev      - Start development server (auto-install if needed)
+#   just build    - Build documentation (auto-install if needed)
+#   just preview  - Preview built documentation
+#   just install  - Install dependencies
+#   just clean    - Clean build artifacts
+
+# Default recipe to display help
+default:
+    @just --list
+
+# Install dependencies
+install:
+    @echo "📦 Installing dependencies..."
+    npm install
+    @echo "✅ Dependencies installed!"
+
+# Start development server with auto-install
+dev:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "🚀 Starting development server..."
+
+    # Check if node_modules exists
+    if [ ! -d "node_modules" ]; then
+        echo "📦 Dependencies not found. Installing..."
+        just install
+    else
+        echo "✅ Dependencies already installed"
+    fi
+
+    echo "🔥 Starting VitePress dev server..."
+    npm run docs:dev
+
+# Build documentation with auto-install
+build:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "🔨 Building documentation..."
+
+    # Check if node_modules exists
+    if [ ! -d "node_modules" ]; then
+        echo "📦 Dependencies not found. Installing first..."
+        just install
+    fi
+
+    npm run docs:build
+    echo "✅ Build complete! Output in .vitepress/dist/"
+
+# Preview built documentation with auto-build
+preview:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "👀 Previewing built documentation..."
+
+    # Check if build exists
+    if [ ! -d ".vitepress/dist" ]; then
+        echo "⚠️  Build not found. Building first..."
+        just build
+    fi
+
+    npm run docs:preview
+
+# Clean build artifacts
+clean:
+    @echo "🧹 Cleaning build artifacts..."
+    rm -rf .vitepress/dist
+    rm -rf .vitepress/cache
+    @echo "✅ Cleaned!"
+
+# Clean everything including node_modules
+clean-all:
+    @echo "🧹 Cleaning everything..."
+    rm -rf .vitepress/dist
+    rm -rf .vitepress/cache
+    rm -rf node_modules
+    rm -f package-lock.json
+    @echo "✅ Deep clean complete!"
+
+# Reinstall dependencies (clean + install)
+reinstall:
+    just clean-all
+    just install
+
+# Full setup (install + build)
+setup: install build
+    @echo "✅ Setup complete!"
+
+# Development workflow (install + dev)
+dev-setup: install dev
+    @echo "✅ Development setup complete!"
+
+# Check for outdated packages
+check:
+    @echo "🔍 Checking for outdated packages..."
+    npm outdated || true
+
+# Update dependencies
+update:
+    @echo "⬆️  Updating dependencies..."
+    npm update
+    @echo "✅ Update complete!"
